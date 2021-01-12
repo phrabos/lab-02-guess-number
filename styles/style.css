@@ -18,8 +18,9 @@ body {
     --gutter: 30px;
     --footer-height: 25px;
     
-    font-family: 'Titillium Web', sans-serif;
-    background-color: var(--color2);
+    font-family: 'Press Start 2P', cursive;
+    background-color: black;
+    color: green;
 }
 
 main {
@@ -60,7 +61,10 @@ footer {
     box-shadow: var(--shadow);
 }
 
-
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+}
 h2 {
     font-size: 1.8rem;
     font-weight: bold;
@@ -72,6 +76,7 @@ h2 {
 
 .main-logo {
     animation: pulse 5s infinite ease-in-out;
+    background-color: green;
 }
 
 header img {
@@ -116,4 +121,7 @@ footer {
         transform: rotate3d(10, 10, 10, 50deg) scale(1);
     }
 
+  }
+  .hidden {
+      visibility: hidden;
   }
