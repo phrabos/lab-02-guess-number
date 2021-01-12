@@ -11,14 +11,14 @@ const resetButton = document.getElementById("reset-button");
 
 
 // initialize state
-let guessesRamaining = 4;
+let guessesRemaining = 4;
 let secretNumber = Math.ceil(Math.random() * 20)
 console.log(`this is the secret number ${secretNumber}`)
 
 // set event listeners to update state and DOM
 submitButton.addEventListener("click", () => {
-    --guessesRamaining
-    guessesRemainingSpan.textContent = guessesRamaining;
+    --guessesRemaining
+    guessesRemainingSpan.textContent = guessesRemaining;
     resultsParagraph.classList.remove("hidden");
     // numberGuessInput.value = '';
     let numberGuess = numberGuessInput.value;
@@ -37,5 +37,11 @@ submitButton.addEventListener("click", () => {
 })
 
 resetButton.addEventListener("click", () => {
-    
+    guessesRemaining = 4;
+    guessesRemainingSpan.textContent = guessesRemaining;
+    numberGuessInput.value="";
+    resultsParagraph.classList.add("hidden");
+    secretNumber = Math.ceil(Math.random() * 20);
+    console.log(secretNumber);
+    console.log("clicked");
 })
