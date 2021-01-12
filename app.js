@@ -13,17 +13,17 @@ const resetButton = document.getElementById("reset-button");
 // initialize state
 let guessesRemaining = 4;
 let secretNumber = Math.ceil(Math.random() * 20)
-console.log(`this is the secret number ${secretNumber}`)
+// console.log(`this is the secret number ${secretNumber}`)
 
 // set event listeners to update state and DOM
 submitButton.addEventListener("click", () => {
     --guessesRemaining
     guessesRemainingSpan.textContent = guessesRemaining;
     resultsParagraph.classList.remove("hidden");
-    // numberGuessInput.value = '';
+
     let numberGuess = numberGuessInput.value;
     let someNum = compareNumbers(numberGuess, secretNumber);
-    console.log(someNum);
+ 
     if(someNum === 1){
         resultsSpan.textContent = "too high";
     } else if (someNum === -1) {
@@ -32,8 +32,14 @@ submitButton.addEventListener("click", () => {
         winLoseParagraph.classList.remove("hidden");
         resultsParagraph.classList.add("hidden");
         winLoseSpan.textContent = "Congratulations, you win!!!"
+    } 
+
+    if(guessesRemaining === 0){
+        winLoseParagraph.classList.remove("hidden");
+        resultsParagraph.classList.add("hidden");
+        winLoseSpan.textContent = "GAME OVER, YOU LOSE!!!";
+        submitButton.disabled = true;
     }
-  console.log(numberGuess)  
 })
 
 resetButton.addEventListener("click", () => {
@@ -42,6 +48,5 @@ resetButton.addEventListener("click", () => {
     numberGuessInput.value="";
     resultsParagraph.classList.add("hidden");
     secretNumber = Math.ceil(Math.random() * 20);
-    console.log(secretNumber);
-    console.log("clicked");
+    submitButton.disabled = false;
 })
