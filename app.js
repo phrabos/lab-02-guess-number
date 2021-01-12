@@ -9,8 +9,6 @@ const numberGuessInput = document.getElementById("number-guess");
 const submitButton = document.getElementById("submit-button");
 const resetButton = document.getElementById("reset-button");
 
-const someTest = compareNumbers(1,3);
-console.log(someTest)
 
 // initialize state
 let guessesRamaining = 4;
@@ -24,9 +22,11 @@ submitButton.addEventListener("click", () => {
     resultsParagraph.classList.remove("hidden");
     // numberGuessInput.value = '';
     let numberGuess = numberGuessInput.value;
-    if(numberGuess > secretNumber){
+    let someNum = compareNumbers(numberGuess, secretNumber);
+    console.log(someNum);
+    if(someNum === 1){
         resultsSpan.textContent = "too high";
-    } else if (numberGuess < secretNumber) {
+    } else if (someNum === -1) {
         resultsSpan.textContent = "too low"
     } else {
         winLoseParagraph.classList.remove("hidden");
