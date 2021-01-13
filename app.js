@@ -47,6 +47,7 @@ resetButton.addEventListener("click", () => {
     guessesRemainingSpan.textContent = guessesRemaining;
     numberGuessInput.value="";
     resultsParagraph.classList.add("hidden");
+    winLoseParagraph.classList.add("hidden");
     secretNumber = Math.ceil(Math.random() * 20);
     submitButton.disabled = false;
 })
