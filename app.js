@@ -1,53 +1,29 @@
 // import functions and grab DOM elements
-import { compareNumbers } from "./utils.js";
-const guessesRemainingSpan = document.getElementById("remaining-guesses");
-const resultsParagraph = document.getElementById("results");
-const resultsSpan = document.getElementById("results-span")
-const winLoseParagraph = document.getElementById("win-lose");
-const winLoseSpan = document.getElementById("win-lose-span");
+import { compareNumbers, logic, showResParagraph, updateRemainingGuesses, resetGame } from "./utils.js";
 const numberGuessInput = document.getElementById("number-guess");
 const submitButton = document.getElementById("submit-button");
 const resetButton = document.getElementById("reset-button");
-
+const gameStrings = ["too high", "too low", "Congrats, you Win!!!", "You Lose, GAME OVER, Go Home!"]
 
 // initialize state
-let guessesRemaining = 4;
-let secretNumber = Math.ceil(Math.random() * 20)
-// console.log(`this is the secret number ${secretNumber}`)
+export let guessesRemaining = [4];
+export let secretNumber = [Math.ceil(Math.random() * 20)]
 
 // set event listeners to update state and DOM
 submitButton.addEventListener("click", () => {
-    --guessesRemaining
-    guessesRemainingSpan.textContent = guessesRemaining;
-    resultsParagraph.classList.remove("hidden");
+    --guessesRemaining[0];
+    updateRemainingGuesses();
+    showResParagraph();
 
-    let numberGuess = numberGuessInput.value;
-    let someNum = compareNumbers(numberGuess, secretNumber);
- 
-    if(someNum === 1){
-        resultsSpan.textContent = "too high";
-    } else if (someNum === -1) {
-        resultsSpan.textContent = "too low"
-    } else {
-        winLoseParagraph.classList.remove("hidden");
-        resultsParagraph.classList.add("hidden");
-        winLoseSpan.textContent = "Congratulations, you win!!!"
-    } 
+    let numberGuess = Number(numberGuessInput.value);
+    let someNum = compareNumbers(numberGuess, secretNumber[0]);
 
-    if(guessesRemaining === 0){
-        winLoseParagraph.classList.remove("hidden");
-        resultsParagraph.classList.add("hidden");
-        winLoseSpan.textContent = "GAME OVER, YOU LOSE!!!";
-        submitButton.disabled = true;
-    }
+    logic(someNum,gameStrings[0], gameStrings[1], gameStrings[2], gameStrings[3]);
+    if(guessesRemaining[0] === 0){submitButton.disabled = true};
 })
 
 resetButton.addEventListener("click", () => {
-    guessesRemaining = 4;
-    guessesRemainingSpan.textContent = guessesRemaining;
+    resetGame();
     numberGuessInput.value="";
-    resultsParagraph.classList.add("hidden");
-    winLoseParagraph.classList.add("hidden");
-    secretNumber = Math.ceil(Math.random() * 20);
     submitButton.disabled = false;
 })
